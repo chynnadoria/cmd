@@ -366,14 +366,9 @@ section {
   font-size: 14px;
   font-weight: 700;
   color: var(--white);
-  letter-spacing: 0.04em;
-}
-.proj-card-tag {
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--mid-gray);
+  letter-spacing: 0.15em;
+  text-align: center;
+  width: 100%;
 }
 
 /* ── CERT & DASHBOARD CAROUSEL ── */
@@ -497,7 +492,6 @@ section {
 }
 .lightbox-close:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
 
-/* center project/cert/dash cards only — titles stay left-aligned */
 #projects .sub-section { width: 100%; }
 .proj-carousel-wrap,
 .card-carousel-wrap { margin: 0 auto; }
