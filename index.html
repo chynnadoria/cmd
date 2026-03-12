@@ -135,39 +135,88 @@
     </div>
   </section>
 
+  <!-- ── LIGHTBOX ── -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">&#10005;</button>
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="Preview" />
+  </div>
+
   <!-- ── PROJECTS ── -->
   <section id="projects">
     <div class="reveal">
       <h2 class="section-title">Projects</h2>
     </div>
 
+    <!-- Projects Carousel -->
     <div class="sub-section reveal">
-      <div class="side-carousel projects-carousel">
+      <div class="proj-carousel-wrap">
         <button class="carousel-btn" id="proj-prev">&#8592;</button>
-        <div class="side-track">
-          <div class="side-slides" id="proj-slides">
-            <div class="side-slide">
-              <div class="project-card">
-                <div class="project-thumb"><span class="project-thumb-label">Project One</span></div>
-                <div class="project-info"><p class="project-name">Project One</p></div>
+        <div class="proj-track-outer">
+          <div class="proj-track" id="proj-slides">
+            <div class="project-wrapper" data-url="https://github.com/youruser/memesensex">
+              <div class="proj-card">
+                <div class="proj-card-img" style="background-image:url('projects/msx.PNG');"></div>
+                <div class="proj-card-overlay">
+                  <p class="proj-card-desc">A meme classification web app built with TensorFlow and Flask.</p>
+                  <span class="proj-card-link">View on GitHub ↗</span>
+                </div>
               </div>
-              <div class="project-card">
-                <div class="project-thumb"><span class="project-thumb-label">Project Two</span></div>
-                <div class="project-info"><p class="project-name">Project Two</p></div>
-              </div>
-              <div class="project-card">
-                <div class="project-thumb"><span class="project-thumb-label">Project Three</span></div>
-                <div class="project-info"><p class="project-name">Project Three</p></div>
+              <div class="proj-card-meta">
+                <span class="proj-card-title">MemeSenseX</span>
+                <span class="proj-card-tag">ML · Web App</span>
               </div>
             </div>
-            <div class="side-slide">
-              <div class="project-card">
-                <div class="project-thumb"><span class="project-thumb-label">Project Four</span></div>
-                <div class="project-info"><p class="project-name">Project Four</p></div>
+            <div class="project-wrapper" data-url="https://github.com/youruser/project2">
+              <div class="proj-card">
+                <div class="proj-card-img" style="background-image:url('projects/project2.png');"></div>
+                <div class="proj-card-overlay">
+                  <p class="proj-card-desc">Description for project two.</p>
+                  <span class="proj-card-link">View on GitHub ↗</span>
+                </div>
               </div>
-              <div class="project-card">
-                <div class="project-thumb"><span class="project-thumb-label">Project Five</span></div>
-                <div class="project-info"><p class="project-name">Project Five</p></div>
+              <div class="proj-card-meta">
+                <span class="proj-card-title">Project Two</span>
+                <span class="proj-card-tag">Data · Analytics</span>
+              </div>
+            </div>
+            <div class="project-wrapper" data-url="https://github.com/youruser/project3">
+              <div class="proj-card">
+                <div class="proj-card-img" style="background-image:url('projects/project3.png');"></div>
+                <div class="proj-card-overlay">
+                  <p class="proj-card-desc">Description for project three.</p>
+                  <span class="proj-card-link">View on GitHub ↗</span>
+                </div>
+              </div>
+              <div class="proj-card-meta">
+                <span class="proj-card-title">Project Three</span>
+                <span class="proj-card-tag">Web · API</span>
+              </div>
+            </div>
+            <div class="project-wrapper" data-url="https://github.com/youruser/project4">
+              <div class="proj-card">
+                <div class="proj-card-img" style="background-image:url('projects/project4.png');"></div>
+                <div class="proj-card-overlay">
+                  <p class="proj-card-desc">Description for project four.</p>
+                  <span class="proj-card-link">View on GitHub ↗</span>
+                </div>
+              </div>
+              <div class="proj-card-meta">
+                <span class="proj-card-title">Project Four</span>
+                <span class="proj-card-tag">ML · Research</span>
+              </div>
+            </div>
+            <div class="project-wrapper" data-url="https://github.com/youruser/project5">
+              <div class="proj-card">
+                <div class="proj-card-img" style="background-image:url('projects/project5.png');"></div>
+                <div class="proj-card-overlay">
+                  <p class="proj-card-desc">Description for project five.</p>
+                  <span class="proj-card-link">View on GitHub ↗</span>
+                </div>
+              </div>
+              <div class="proj-card-meta">
+                <span class="proj-card-title">Project Five</span>
+                <span class="proj-card-tag">Data · Visualization</span>
               </div>
             </div>
           </div>
@@ -176,33 +225,61 @@
       </div>
     </div>
 
+    <!-- Certifications -->
     <div class="sub-section reveal">
       <p class="sub-section-title">Certifications</p>
-      <div class="side-carousel">
+      <div class="card-carousel-wrap">
         <button class="carousel-btn" id="cert-prev">&#8592;</button>
-        <div class="side-track">
-          <div class="side-slides" id="cert-slides">
-            <div class="side-slide"><div class="cert-thumb"><span>Certificate</span></div></div>
-            <div class="side-slide"><div class="cert-thumb"><span>Certificate</span></div></div>
+        <div class="card-track-outer">
+          <div class="card-track" id="cert-slides">
+            <div class="side-slide">
+              <div class="media-card" data-lightbox="portfolio/certs/powerBI.jpg">
+                <div class="media-card-img" style="background-image:url('portfolio/certs/powerBI.jpg');"></div>
+                <div class="media-card-footer">
+                  <span class="media-card-title">Power BI Certificate</span>
+                  <span class="media-card-zoom">&#128269;</span>
+                </div>
+              </div>
+            </div>
+            <div class="side-slide">
+              <div class="media-card" data-lightbox="portfolio/certs/powerBI.jpg">
+                <div class="media-card-img" style="background-image:url('portfolio/certs/powerBI.jpg');"></div>
+                <div class="media-card-footer">
+                  <span class="media-card-title">Power BI Certificate</span>
+                  <span class="media-card-zoom">&#128269;</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <button class="carousel-btn" id="cert-next">&#8594;</button>
       </div>
     </div>
 
+    <!-- Dashboards -->
     <div class="sub-section reveal">
       <p class="sub-section-title">Dashboards</p>
-      <div class="side-carousel">
+      <div class="card-carousel-wrap">
         <button class="carousel-btn" id="dash-prev">&#8592;</button>
-        <div class="side-track">
-          <div class="side-slides" id="dash-slides">
+        <div class="card-track-outer">
+          <div class="card-track" id="dash-slides">
             <div class="side-slide">
-              <div class="dash-thumb"></div>
-              <div class="dash-label">GoodReads Data</div>
+              <div class="media-card" data-lightbox="portfolio/certs/powerBI.jpg">
+                <div class="media-card-img" style="background-image:url('portfolio/certs/powerBI.jpg');"></div>
+                <div class="media-card-footer">
+                  <span class="media-card-title">Sales Dashboard</span>
+                  <span class="media-card-zoom">&#128269;</span>
+                </div>
+              </div>
             </div>
             <div class="side-slide">
-              <div class="dash-thumb"></div>
-              <div class="dash-label">Dashboard 2</div>
+              <div class="media-card" data-lightbox="portfolio/certs/powerBI.jpg">
+                <div class="media-card-img" style="background-image:url('portfolio/certs/powerBI.jpg');"></div>
+                <div class="media-card-footer">
+                  <span class="media-card-title">Analytics Dashboard</span>
+                  <span class="media-card-zoom">&#128269;</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -364,12 +441,76 @@
       <h2 class="section-title">Organizations</h2>
     </div>
     <div class="org-grid reveal">
+
+      <!-- 1 -->
       <div class="org-card">
-        <div class="org-thumb"><span>Organization</span></div>
+        <div class="org-front">
+          <div class="org-accent"></div>
+          <p class="org-date">Sept 2023 – June 2024</p>
+          <p class="org-position">Chief Finance Officer</p>
+          <p class="org-name">Google Developer Student Clubs – PUP Main</p>
+        </div>
+        <div class="org-back">
+          <p class="org-back-role">Chief Finance Officer</p>
+          <ul class="org-bullets">
+            <li>Organized and executed an in-person celebration event for the successful completion of a major project, enhancing team morale and recognizing each member's contributions.</li>
+            <li>Managed the budgeting, forecasting, and financial planning processes, ensuring alignment with organizational goals.</li>
+            <li>Ensured compliance with regulatory requirements and maintained accurate financial records and reports.</li>
+          </ul>
+        </div>
       </div>
+
+      <!-- 2 -->
       <div class="org-card">
-        <div class="org-thumb"><span>Organization</span></div>
+        <div class="org-front">
+          <div class="org-accent"></div>
+          <p class="org-date">Nov 2022 – Nov 2024</p>
+          <p class="org-position">Finance &amp; Marketing Committee Member</p>
+          <p class="org-name">PUP Society of Pangasinan Students</p>
+        </div>
+        <div class="org-back">
+          <p class="org-back-role">Finance &amp; Marketing Committee Member</p>
+          <ul class="org-bullets">
+            <li>Engineered the technical setup to enable live sharing of various media content on-screen during a virtual event with over 200 participants, ensuring an engaging and interactive experience.</li>
+          </ul>
+        </div>
       </div>
+
+      <!-- 3 -->
+      <div class="org-card">
+        <div class="org-front">
+          <div class="org-accent"></div>
+          <p class="org-date">Nov 2022 – June 2023</p>
+          <p class="org-position">Executive Auditor</p>
+          <p class="org-name">Google Developer Student Clubs – PUP Main</p>
+        </div>
+        <div class="org-back">
+          <p class="org-back-role">Executive Auditor</p>
+          <ul class="org-bullets">
+            <li>Spearheaded a team of 4 within the finance department to maintain proper workflow, leading weekly meetings and overseeing assigned tasks.</li>
+            <li>Collaborated with executive leads across departments to support event planning through clear communication.</li>
+            <li>Prepared key financial and sponsorship materials, including an event balance sheet and a sponsorship package primer.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="org-card">
+        <div class="org-front">
+          <div class="org-accent"></div>
+          <p class="org-date">Oct 2022 – Oct 2024</p>
+          <p class="org-position">Documentations Committee Member</p>
+          <p class="org-name">PUP Association of Students for Computer Intelligence Integration (PUP-ASCII)</p>
+        </div>
+        <div class="org-back">
+          <p class="org-back-role">Documentations Committee Member</p>
+          <ul class="org-bullets">
+            <li>Planned and implemented engaging yet educational events for fellow students.</li>
+            <li>Collaborated with 68 fellow organization members to implement university-wide events.</li>
+          </ul>
+        </div>
+      </div>
+
     </div>
   </section>
 

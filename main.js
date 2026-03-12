@@ -34,11 +34,22 @@ const navObserver = new IntersectionObserver(entries => {
     }
   });
 }, {
-  rootMargin: '-10% 0px -60% 0px',   // section is in top 40% of viewport
+  rootMargin: '-10% 0px -50% 0px',
   threshold: 0
 });
 
 sections.forEach(s => navObserver.observe(s));
+
+// also highlight last nav link when page is scrolled to bottom
+window.addEventListener('scroll', () => {
+  const nearBottom = window.scrollY + window.innerHeight >= document.body.scrollHeight - 80;
+  if (nearBottom) {
+    const lastSection = sections[sections.length - 1];
+    allLinks.forEach(a => a.classList.remove('active'));
+    const active = document.querySelector(`nav a[href="#${lastSection.id}"]`);
+    if (active) active.classList.add('active');
+  }
+});
 
 // scroll reveal
 const revealObserver = new IntersectionObserver(entries => {
@@ -100,29 +111,89 @@ makeCarousel({
   dotsContainer:  document.getElementById('exp-dots'),
 });
 
-// certification carousel
-makeTrackCarousel({
-  trackId:       'cert-slides',
-  prevBtn:       document.getElementById('cert-prev'),
-  nextBtn:       document.getElementById('cert-next'),
-  slideSelector: '.side-slide',
+// ── NEW CARD CAROUSEL for proj / cert / dash ────────────
+function makeSlideCarousel({ trackId, prevBtnId, nextBtnId, slideSelector }) {
+  const track = document.getElementById(trackId);
+  if (!track) return;
+
+  let cards = Array.from(track.querySelectorAll(slideSelector));
+  if (!cards.length) return;
+
+  // clone ends for infinite loop
+  const prependClones = cards.slice(-1).map(c => c.cloneNode(true));
+  const appendClones  = cards.slice(0, 1).map(c => c.cloneNode(true));
+  prependClones.forEach(c => track.insertBefore(c, track.firstChild));
+  appendClones.forEach(c => track.appendChild(c));
+
+  cards = Array.from(track.querySelectorAll(slideSelector));
+  let idx = 1; // start at first real card
+
+  function updatePos(animated = true) {
+    const w = cards[0].getBoundingClientRect().width;
+    if (!animated) track.style.transition = 'none';
+    track.style.transform = `translateX(-${idx * w}px)`;
+    if (!animated) {
+      track.getBoundingClientRect();
+      track.style.transition = '';
+    }
+  }
+
+  track.addEventListener('transitionend', () => {
+    const total = cards.length;
+    if (idx <= 0) { idx = total - 2; updatePos(false); }
+    else if (idx >= total - 1) { idx = 1; updatePos(false); }
+  });
+
+  document.getElementById(prevBtnId).addEventListener('click', () => { idx--; updatePos(true); });
+  document.getElementById(nextBtnId).addEventListener('click', () => { idx++; updatePos(true); });
+  window.addEventListener('resize', () => updatePos(false));
+  window.requestAnimationFrame(() => updatePos(false));
+}
+
+// projects carousel
+makeSlideCarousel({ trackId: 'proj-slides', prevBtnId: 'proj-prev', nextBtnId: 'proj-next', slideSelector: '.project-wrapper' });
+
+// certifications carousel
+makeSlideCarousel({ trackId: 'cert-slides', prevBtnId: 'cert-prev', nextBtnId: 'cert-next', slideSelector: '.side-slide' });
+
+// dashboards carousel
+makeSlideCarousel({ trackId: 'dash-slides', prevBtnId: 'dash-prev', nextBtnId: 'dash-next', slideSelector: '.side-slide' });
+
+// ── PROJECTS: click to open URL ──────────────────────────
+const projTrack = document.getElementById('proj-slides');
+if (projTrack) {
+  projTrack.addEventListener('click', e => {
+    const wrapper = e.target.closest('.project-wrapper');
+    if (wrapper && wrapper.dataset.url) window.open(wrapper.dataset.url, '_blank');
+  });
+}
+
+// ── LIGHTBOX ─────────────────────────────────────────────
+const lightbox      = document.getElementById('lightbox');
+const lightboxImg   = document.getElementById('lightbox-img');
+const lightboxClose = document.getElementById('lightbox-close');
+const lightboxBack  = document.getElementById('lightbox-backdrop');
+
+function openLightbox(src) {
+  lightboxImg.src = src;
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+  setTimeout(() => { lightboxImg.src = ''; }, 300);
+}
+
+// click on cert / dashboard cards
+document.addEventListener('click', e => {
+  const card = e.target.closest('.media-card[data-lightbox]');
+  if (card) openLightbox(card.dataset.lightbox);
 });
 
-// dashboards carousel (reusing same styles as certifications since it's also a side-scroll)
-makeTrackCarousel({
-  trackId:       'dash-slides',
-  prevBtn:       document.getElementById('dash-prev'),
-  nextBtn:       document.getElementById('dash-next'),
-  slideSelector: '.side-slide',
-});
-
-// projects carousel: three cards per slide
-makeTrackCarousel({
-  trackId:       'proj-slides',
-  prevBtn:       document.getElementById('proj-prev'),
-  nextBtn:       document.getElementById('proj-next'),
-  slideSelector: '.side-slide',
-});
+lightboxClose.addEventListener('click', closeLightbox);
+lightboxBack.addEventListener('click', closeLightbox);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
 // skills tabs
 const tabs   = document.querySelectorAll('.skill-tab');
