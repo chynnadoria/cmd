@@ -521,7 +521,7 @@ section {
 .skill-name {
   font-family: 'Space Mono', monospace;
   font-size: 12px; letter-spacing: 0.05em;
-  color: var(--white); min-width: 96px;
+  color: var(--white); min-width: 130px;
 }
 .skill-bar-bg {
   flex: 1; height: 2px; background: #1e1e1e;
