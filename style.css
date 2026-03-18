@@ -5,7 +5,7 @@
   --gray: #3a3a3a;
   --mid-gray: #888;
   --border: #1e1e1e;
-  --nav-h: 64px;
+  --nav-h: 60px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -200,7 +200,6 @@ section {
   font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
 }
 
-/* ── Fixed-height slide container ── */
 .exp-slide {
   display: none;
   flex-direction: column;
@@ -266,7 +265,7 @@ section {
 .sub-section { margin-bottom: 64px; }
 .sub-section-title {
   font-family: 'Space Mono', monospace;
-  font-size: 11px; letter-spacing: 0.2em;
+  font-size: 13px; letter-spacing: 0.2em;
   text-transform: uppercase; color: var(--mid-gray);
   margin-bottom: 28px; padding-bottom: 12px;
   border-bottom: 1px solid var(--border);
