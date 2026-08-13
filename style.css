@@ -200,10 +200,19 @@ section {
   font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
 }
 
+.exp-carousel {
+  position: relative;
+  height: 460px; /* fixed container height so carousel doesn't shift */
+  overflow: visible;
+  margin-top: 36px; /* lower carousel vertically within the experiences section */
+}
+
 .exp-slide {
+  position: absolute;
+  inset: 0;
   display: none;
   flex-direction: column;
-  height: 330px; 
+  padding: 20px 24px;
 }
 .exp-slide.active { display: flex; }
 
@@ -230,8 +239,8 @@ section {
 .exp-bullets {
   list-style: none;
   display: flex; flex-direction: column; gap: 10px;
-  flex: 1; 
-  overflow: hidden; 
+  flex: 1;
+  overflow: visible;
 }
 .exp-bullets li {
   font-size: 16px; color: #a1a1a1; padding-left: 18px;
@@ -242,8 +251,13 @@ section {
 /* fixed carousell */
 .carousel-nav {
   display: flex; align-items: center; gap: 12px;
-  margin-top: 24px;
-  flex-shrink: 0; 
+  margin-top: 0;
+  flex-shrink: 0;
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
 }
 .carousel-btn {
   background: none; border: 1px solid #2a2a2a;
@@ -659,6 +673,10 @@ footer span {
   #experiences .exp-inner { grid-template-columns: 1fr; gap: 32px; }
   #experiences .wavy-bg { display: none; }
   section { padding: calc(var(--nav-h) + 24px) 32px 60px; }
+
+  /* restore normal flow for small screens */
+  #experiences .exp-carousel { position: static; height: auto; }
+  .exp-slide { position: static; padding: 0; }
 }
 
 @media (max-width: 640px) {
