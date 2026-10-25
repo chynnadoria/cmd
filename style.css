@@ -191,7 +191,7 @@ section {
 #experiences .exp-inner {
   position: relative; z-index: 1;
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
   gap: 80px; align-items: center;
 }
 .exp-left-label {
@@ -202,17 +202,21 @@ section {
 
 .exp-carousel {
   position: relative;
-  height: 460px; /* fixed container height so carousel doesn't shift */
-  overflow: visible;
-  margin-top: 36px; /* lower carousel vertically within the experiences section */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  min-height: 460px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  background: rgba(10, 10, 10, 0.82);
+  margin-top: 36px;
 }
 
 .exp-slide {
-  position: absolute;
-  inset: 0;
   display: none;
   flex-direction: column;
-  padding: 20px 24px;
+  min-width: 0;
 }
 .exp-slide.active { display: flex; }
 
@@ -239,8 +243,7 @@ section {
 .exp-bullets {
   list-style: none;
   display: flex; flex-direction: column; gap: 10px;
-  flex: 1;
-  overflow: visible;
+  min-width: 0;
 }
 .exp-bullets li {
   font-size: 16px; color: #a1a1a1; padding-left: 18px;
@@ -248,16 +251,11 @@ section {
 }
 .exp-bullets li::before { content: '–'; position: absolute; left: 0; color: #444; }
 
-/* fixed carousell */
-.carousel-nav {
+/* experience carousel navigation */
+#experiences .carousel-nav {
   display: flex; align-items: center; gap: 12px;
-  margin-top: 0;
+  margin: 24px auto 0;
   flex-shrink: 0;
-  position: absolute;
-  bottom: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: auto;
 }
 .carousel-btn {
   background: none; border: 1px solid #2a2a2a;
@@ -290,16 +288,19 @@ section {
   display: flex;
   align-items: center;
   gap: 20px;
+  min-width: 0;
   max-width: 860px;
   margin: 0 auto;
 }
 .proj-track-outer {
   flex: 1;
+  min-width: 0;
   overflow: hidden;
 }
 .proj-track {
   display: flex;
   gap: 0;
+  min-width: 0;
   transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -307,6 +308,7 @@ section {
 .project-wrapper {
   flex: 0 0 100%;
   width: 100%;
+  min-width: 0;
   cursor: pointer;
 }
 
@@ -342,24 +344,25 @@ section {
   align-items: center;
   justify-content: center;
   gap: 14px;
-  padding: 32px;
+  padding: clamp(12px, 3vw, 32px);
   opacity: 0;
   transition: opacity 0.35s;
   z-index: 2;
+  overflow-y: auto;
 }
 .proj-card:hover .proj-card-overlay { opacity: 1; }
 
 .proj-card-desc {
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: clamp(10px, 1.2vw, 15px);
+  line-height: 1.5;
   color: var(--white);
   text-align: center;
   max-width: 520px;
 }
 .proj-card-link {
   font-family: 'Space Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.15em;
+  font-size: clamp(9px, 0.9vw, 11px);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--mid-gray);
   border-bottom: 1px solid #444;
@@ -389,27 +392,32 @@ section {
   display: flex;
   align-items: center;
   gap: 20px;
+  min-width: 0;
   max-width: 780px;
   margin: 0 auto;
 }
 .card-track-outer {
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
   overflow: hidden;
 }
 .card-track {
   display: flex;
   gap: 0;
+  min-width: 0;
   transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .side-slide {
   flex: 0 0 100%;
   width: 100%;
+  min-width: 0;
   display: flex;
   justify-content: center;
 }
 
 /* ── MEDIA CARD (certs + dashboards) ── */
 .media-card {
+  min-width: 0;
   width: 100%;
   border: 1px solid var(--border);
   border-radius: 4px;
@@ -528,16 +536,21 @@ section {
 .skills-panel.active { display: block; }
 
 .skills-list { display: flex; flex-direction: column; gap: 16px; }
-.skill-item { display: flex; align-items: center; gap: 14px; }
+.skill-item {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 160px) minmax(0, 1fr);
+  align-items: center;
+  column-gap: 14px;
+}
 .skill-icon { width: 20px; height: 20px; color: var(--mid-gray); flex-shrink: 0; }
 .skill-icon svg { width: 100%; height: 100%; }
 .skill-name {
   font-family: 'Space Mono', monospace;
   font-size: 12px; letter-spacing: 0.05em;
-  color: var(--white); min-width: 130px;
+  color: var(--white); min-width: 0;
 }
 .skill-bar-bg {
-  flex: 1; height: 2px; background: #1e1e1e;
+  min-width: 0; height: 2px; background: #1e1e1e;
   border-radius: 2px; overflow: hidden;
 }
 .skill-bar {
@@ -549,12 +562,14 @@ section {
 /* ── ORGANIZATIONS ── */
 .org-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr));
   gap: 20px;
+  width: 100%;
 }
 
 .org-card {
   position: relative;
+  min-width: 0;
   border: 1px solid var(--border);
   border-radius: 4px;
   overflow: hidden;
@@ -641,7 +656,7 @@ section {
   padding-left: 16px; position: relative;
   line-height: 1.6;
 }
-.org-bullets li::before { content: '–'; position: absolute; left: 0; color: #444; }
+.org-bullets li::before { content: '\2022'; position: absolute; left: 0; color: #444; }
 
 /* scroll reveal */
 .reveal {
@@ -670,13 +685,19 @@ footer span {
 
 /* responsive */
 @media (max-width: 900px) {
-  #experiences .exp-inner { grid-template-columns: 1fr; gap: 32px; }
+  #experiences .exp-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+  #experiences .section-title { margin-bottom: 0; }
   #experiences .wavy-bg { display: none; }
   section { padding: calc(var(--nav-h) + 24px) 32px 60px; }
 
-  /* restore normal flow for small screens */
-  #experiences .exp-carousel { position: static; height: auto; }
-  .exp-slide { position: static; padding: 0; }
+  #experiences .exp-carousel {
+    min-height: 0;
+    margin-top: 0;
+  }
 }
 
 @media (max-width: 640px) {
@@ -700,16 +721,45 @@ footer span {
   section { padding: calc(var(--nav-h) + 16px) 20px 48px; }
   footer { padding: 24px 20px; }
 
+  #experiences .exp-carousel { padding: 18px 16px; }
+  .exp-date { font-size: 12px; }
+  .exp-company { font-size: 16px; }
+  .exp-bullets li { font-size: 14px; }
+
+  .org-front { padding: 22px 18px 24px; }
+  .org-back { padding: 18px; }
+  .org-back-role { font-size: 10px; }
+  .org-bullets li { font-size: 12px; }
+
+  .skill-item {
+    grid-template-columns: 20px minmax(0, 110px) minmax(0, 1fr);
+    column-gap: 10px;
+  }
   .skills-tabs { gap: 6px; }
   .skill-tab { font-size: 9px; padding: 6px 10px; }
-  .skill-name { min-width: 80px; }
 
   .proj-carousel-wrap,
-  .card-carousel-wrap { flex-wrap: wrap; gap: 12px; }
+  .card-carousel-wrap { flex-wrap: nowrap; gap: 10px; }
   .proj-carousel-wrap .carousel-btn,
-  .card-carousel-wrap .carousel-btn { order: 2; }
+  .card-carousel-wrap .carousel-btn {
+    order: 0;
+    width: 32px;
+    height: 32px;
+  }
   .proj-track-outer,
-  .card-track-outer { order: 1; width: 100%; }
+  .card-track-outer {
+    order: 0;
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+  }
+  .proj-card { aspect-ratio: 1 / 1; }
+  .proj-card-overlay { gap: 8px; }
+  .proj-card-desc { font-size: clamp(10px, 2.6vw, 12px); }
+  .proj-card-link { font-size: 9px; }
+  .proj-card-title { font-size: 12px; letter-spacing: 0.08em; }
+  .media-card-footer { gap: 8px; padding: 10px; }
+  .media-card-title { font-size: 10px; letter-spacing: 0.06em; }
 
   .carousel-nav { gap: 10px; }
 }
